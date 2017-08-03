@@ -1,0 +1,20 @@
+{
+    "short_name": "Filler Name",
+    "name": "Your App's Name Here",
+    "icons": [
+        {
+            "src": "icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icon-192x192.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=homescreen",
+    "background_color": "#222",
+    "theme_color": "#c41200",
+    "display": "standalone"
+}
