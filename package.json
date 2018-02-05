@@ -37,9 +37,8 @@
     "axios": "^0.16.2",
     "compression": "^1.7.0",
     "express": "^4.15.3",
-    "react": "^15.6.1",
-    "react-bootstrap": "^0.31.1",
-    "react-dom": "^15.6.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "whatwg-fetch": "^2.0.3"
   }
 }
