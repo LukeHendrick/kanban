@@ -3,8 +3,6 @@
 
 ## Includes Express and Webpack
 
- 
-#### Leverages React-Bootstrap for styling
 
 First things first:
 
