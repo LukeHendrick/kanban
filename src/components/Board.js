@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
-import {DragDropContext} from 'react-beautiful-dnd';
+import {DragDropContext, Droppable} from 'react-beautiful-dnd';
 import VertList from './VertList';
+import Modal from './Modal';
+import UUID from '../utils/uuid.js';
 import 'whatwg-fetch'
 
 const reorder = (list, source, destination) => {
@@ -33,10 +35,13 @@ export default class Board extends Component {
             _id: '',
             name: '',
             items: {},
+            ordered: [],
+            modalDisplay: 'none',
         }
         this.onDragEnd = this.onDragEnd.bind(this)
         this.addNoteClick = this.addNoteClick.bind(this);
         this.saveClick = this.saveClick.bind(this);
+        this.addNote = this.addNote.bind(this);
     }
 
     componentDidMount() {
@@ -48,7 +53,7 @@ export default class Board extends Component {
                     items[key] = board[key]
                 }
             }
-            this.setState({_id: board._id, name: board.name, items: items})
+            this.setState({_id: board._id, name: board.name, items: items, ordered: Object.keys(items)})
   
     }
 
@@ -56,6 +61,17 @@ export default class Board extends Component {
 
         if (!result.destination) {
             return;
+        }
+        console.log(result);
+        if (result.type === "COLUMN") {
+            const items = reorder(
+                this.state.ordered,
+                result.source,
+                result.destination
+            )
+            this.setState({
+                ordered: items
+            })
         }
         const destination = result.destination.droppableId
         const items = reorder(
@@ -72,30 +88,52 @@ export default class Board extends Component {
 
     addNoteClick() {
         console.log("YAY");
-        
+        this.setState({modalDisplay: 'block'})
+    }
+
+    addNote(title, content) {
+        let first = Object.keys(this.state.items)[0];
+        let id = UUID();
+        let note = {'id': id, 'title': title, 'content': content}
+        let items = this.state.items;
+        items[first].splice(0, 0, note);
+        this.setState({
+            modalDisplay: 'none',
+            items
+        });
     }
 
     saveClick() {
-        console.log(this.state.name);
-        console.log(this.state._id);
         let newBoard = {'_id': this.state._id, 'name': this.state.name, ...this.state.items};
         localStorage.setItem('board', JSON.stringify(newBoard))
         fetch(`/api/save?board=${JSON.stringify(newBoard)}&name=${this.state.name}`, {method: 'POST'})
-        .then((res) => console.log(res));
+        .then((res) => res);
     }
     render() {
-        
+        let disp = this.state.modalDisplay
         return (
-            <DragDropContext onDragEnd={this.onDragEnd}>
-                <div>
-                    <h1>{this.state.name}</h1>
-                    {Object.keys(this.state.items).map((item, index) => 
-                        <VertList title={item} index={index} items={this.state.items[item]} key={index} num={index} />
-                    )}
-                </div>
-                <button onClick={this.addNoteClick}>Add Note</button>
-                <button onClick={this.saveClick}>Save</button>
-            </DragDropContext>
+            <div>
+                <DragDropContext onDragEnd={this.onDragEnd}>
+                    <Droppable type='COLUMN' droppableId='board'>
+                        {(provided, snapshot) => (
+                            <div
+                                ref={provided.innerRef}
+                            >
+                            <div>
+                                <h1>{this.state.name}</h1>
+                                {Object.keys(this.state.items).map((item, index) => 
+                                    <VertList title={item} index={index} items={this.state.items[item]} key={index} num={index} />
+                                )}
+                            </div>
+                            <button onClick={this.addNoteClick}>Add Note</button>
+                            <button onClick={this.saveClick}>Save</button>
+                            {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+                <Modal display={disp} addNote={this.addNote}/>
+            </div>
         )
     }
 }
