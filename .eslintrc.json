@@ -1,0 +1,22 @@
+{
+    "extends": "airbnb",
+    "rules": {
+        "no-plusplus": 0,
+        "no-bitwise": 0,
+        "prefer-destructuring": 0,
+        "no-underscore-dangle": 0,
+        "react/destructuring-assignment": 0,
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ]
+    },
+    "env": {
+        "browser": true
+    }
+}

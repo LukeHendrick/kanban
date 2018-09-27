@@ -1,45 +1,79 @@
-import React, {Component} from 'react';
-import {Draggable, Droppable} from 'react-beautiful-dnd';
+import React from 'react';
+import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { ContextMenuTrigger } from 'react-contextmenu';
 import VertItem from './VertItem';
-const grid = 8
-const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    float: 'left',
-    padding: grid,
-    width: '15rem',
-    margin: '2rem',
-})
+import TitleMenu from './menu/TitleMenu';
 
-export default class VertList extends Component {
-    render() {
-        return (
-            <Draggable draggableId={`drag${this.props.title}`} index={this.props.index}>
-                {(provided, snapshot) => (
-                    <div>
-                        <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                        >
-                            <Droppable type="LIST" droppableId={this.props.title}>
-                                {(provided, snapshot) => (
-                                    <div 
-                                        ref={provided.innerRef}
-                                        style={getListStyle(snapshot.isDraggingOver)}
-                                    >
-                                        <h2>{this.props.title}</h2>
-                                        {this.props.items.map((item, index) => 
-                                            <VertItem item={item} column={this.props.title} index={index} key={`${index}`} />
-                                        )}
-                                        {provided.placeholder}
-                                    </div>
-                                )}
-                            </Droppable>
-                        </div>
-                        {provided.placeholder}
-                    </div>
+const grid = 8;
+const getListStyle = (isDraggingOver, count) => ({
+  background: isDraggingOver ? 'rgba(173, 216, 230, 0.6)' : 'transparent',
+  height: count >= 5 ? 'auto' : '40rem',
+  zIndex: '-2',
+});
+
+const getContainerStyle = () => ({
+  float: 'left',
+  zIndex: '-5',
+  background: 'rgba(255,255,255,0.6)',
+  padding: grid,
+  width: '15rem',
+  margin: '2rem',
+  textAlign: 'center',
+  boxShadow: '2px 3px 10px 4px rgba(255,255,255,0.4)',
+});
+
+const VertList = props => (
+  <Draggable draggableId={`drag${props.title}`} index={props.index}>
+    {provided => (
+      <div>
+        <ContextMenuTrigger id={`listcontext${props.title}`}>
+          <div
+            style={{ width: '2rem' }}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            {...provided.dragHandleProps}
+          >
+            <div style={getContainerStyle()}>
+              <div>
+                <h2>{props.title}</h2>
+              </div>
+              <Droppable type="LIST" droppableId={props.title}>
+                {(dropProvided, dropSnapshot) => (
+                  <div
+                    ref={dropProvided.innerRef}
+                    style={getListStyle(dropSnapshot.isDraggingOver, props.items.length)}
+                  >
+                    {props.items.map((item, index) => (
+                      <VertItem
+                        item={item}
+                        itemMoving={props.itemMoving}
+                        draggingOver={dropSnapshot.isDraggingOver}
+                        color={item.color}
+                        column={props.title}
+                        last={props.last}
+                        index={index}
+                        key={item.id}
+                        deleteStart={props.deleteStart}
+                        editStart={props.editStart}
+                      />
+                    ))}
+                    <div>{dropProvided.placeholder}</div>
+                  </div>
                 )}
-            </Draggable>
-        )
-    }
-}
+              </Droppable>
+            </div>
+          </div>
+          {provided.placeholder}
+        </ContextMenuTrigger>
+        <TitleMenu
+          id={`listcontext${props.title}`}
+          type="list"
+          editStart={props.editStart}
+          deleteStart={props.deleteStart}
+          index={props.index}
+        />
+      </div>
+    )}
+  </Draggable>
+);
+export default VertList;
