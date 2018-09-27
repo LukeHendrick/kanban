@@ -59,7 +59,7 @@ const VertItem = (props) => {
             >
               <h3>{item.title}</h3>
               <p>{item.content}</p>
-              <ShadowPseudo itemMoving={snapshot.isDragging ? props.itemMoving : props.draggingOver} />
+              <ShadowPseudo itemMoving={props.itemMoving} />
             </div>
           </ContextMenuTrigger>
           <NoteMenu
