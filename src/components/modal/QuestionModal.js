@@ -36,9 +36,17 @@ export default class QuestionModal extends Component {
         <ThemeProvider theme={theme}>
           <BaseModal key="modal">
             <div style={{ textAlign: 'center' }}>
-              <h1 style={{ fontWeight: 400 }}>Welcome!</h1>
-              <h2 style={{ fontWeight: 200 }}>This is where question-y stuff will go</h2>
-              <h2 style={{ fontWeight: 200 }}>...whenever I get around to it</h2>
+              <h1 style={{ fontWeight: 400 }}>Hello!</h1>
+              <h2 style={{ fontWeight: 200 }}>Just a few tips...</h2>
+              <h2 style={{ fontWeight: 200 }}>
+                Right-click on a note or lane to Edit or Delete that object
+              </h2>
+              <h2 style={{ fontWeight: 200 }}>
+                You can reorder notes, but you can also reorder lanes if you want...
+              </h2>
+              <h2 style={{ fontWeight: 200 }}>
+                The board autosaves, both locally and in the cloud
+              </h2>
               <Button onClick={this.handleClick}>Close</Button>
             </div>
           </BaseModal>

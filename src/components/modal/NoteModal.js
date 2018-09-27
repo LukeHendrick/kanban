@@ -55,20 +55,35 @@ export default class NoteModal extends Component {
         <ThemeProvider theme={theme}>
           <BaseModal key="modal">
             <h1>Add A New Note</h1>
-            <form name="newNote" onSubmit={this.handleSubmit}>
-              <label htmlFor="title">
-                Title:
-                <input name="title" value={this.state.title} onChange={this.handleChange} />
-              </label>
-              <label htmlFor="content">
-                Content:
-                <input name="content" value={this.state.content} onChange={this.handleChange} />
-              </label>
-              <br />
-              <Button type="submit">Submit</Button>
-              <Button type="button" onClick={this.handleCancel}>
-                Cancel
-              </Button>
+            <form style={{ display: 'table', margin: '0 auto' }} onSubmit={this.handleSubmit}>
+              <p style={{ display: 'table-row' }}>
+                <input
+                  style={{
+                    display: 'table-cell', fontSize: '2rem', width: '100%', border: '1px solid black',
+                  }}
+                  name="title"
+                  value={this.state.title}
+                  onChange={this.handleChange}
+                  placeholder="Title"
+                />
+                <br />
+              </p>
+              <p style={{ display: 'table-row' }}>
+                <textarea
+                  style={{
+                    display: 'table-cell', fontSize: '2rem', width: '100%', border: '1px solid black',
+                  }}
+                  name="content"
+                  value={this.state.content}
+                  onChange={this.handleChange}
+                  placeholder="Content"
+                />
+                <br />
+              </p>
+              <p>
+                <Button type="submit">Submit</Button>
+                <Button onClick={this.handleCancel}> Cancel </Button>
+              </p>
             </form>
           </BaseModal>
         </ThemeProvider>

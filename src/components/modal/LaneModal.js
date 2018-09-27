@@ -49,14 +49,21 @@ export default class LaneModal extends Component {
         <ThemeProvider theme={theme}>
           <BaseModal key="modal">
             <h1>Add A New Lane</h1>
-            <form name="newLane" onSubmit={this.handleSubmit}>
-              <label htmlFor="laneTitle">
-                Lane Title:
-                <input name="laneTitle" value={this.state.title} onChange={this.handleChange} />
-              </label>
-              <br />
-              <Button type="submit">Submit</Button>
-              <Button type="button" onClick={this.handleCancel}>Cancel</Button>
+            <form style={{ display: 'table', margin: '0 auto' }} onSubmit={this.handleSubmit}>
+              <p style={{ display: 'table-row' }}>
+                <input
+                  style={{ display: 'table-cell', fontSize: '2rem', width: '100%' }}
+                  name="title"
+                  value={this.state.title}
+                  onChange={this.handleChange}
+                  placeholder="Title"
+                />
+                <br />
+              </p>
+              <p>
+                <Button type="submit">Submit</Button>
+                <Button onClick={this.handleCancel}> Cancel </Button>
+              </p>
             </form>
           </BaseModal>
         </ThemeProvider>
