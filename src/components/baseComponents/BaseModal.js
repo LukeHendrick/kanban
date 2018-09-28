@@ -29,6 +29,10 @@ const BaseModal = styled.div`
   animation-fill-mode: forwards;
   animation-delay: 0s;
   animation-play-state: running;
+
+  @media (max-width: 450px) {
+    width: 75%;
+  }
 `;
 
 BaseModal.defaultProps = {
