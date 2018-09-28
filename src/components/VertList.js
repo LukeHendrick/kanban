@@ -5,9 +5,9 @@ import VertItem from './VertItem';
 import TitleMenu from './menu/TitleMenu';
 
 const grid = 8;
-const getListStyle = (isDraggingOver, count, length) => ({
+const getListStyle = (isDraggingOver, count, maxCount, length) => ({
   background: isDraggingOver ? 'rgba(173, 216, 230, 0.6)' : 'transparent',
-  height: count >= 5 ? 'auto' : length,
+  height: count >= maxCount ? 'auto' : length,
   zIndex: '-2',
 });
 
@@ -24,6 +24,7 @@ const getContainerStyle = () => ({
 
 const VertList = (props) => {
   const length = window.screen.height > 900 ? '40rem' : '30rem';
+  const maxCount = window.screen.height > 900 ? 5 : 4;
   return (
     <Draggable draggableId={`drag${props.title}`} index={props.index}>
       {provided => (
@@ -43,7 +44,12 @@ const VertList = (props) => {
                   {(dropProvided, dropSnapshot) => (
                     <div
                       ref={dropProvided.innerRef}
-                      style={getListStyle(dropSnapshot.isDraggingOver, props.items.length, length)}
+                      style={getListStyle(
+                        dropSnapshot.isDraggingOver,
+                        props.items.length,
+                        maxCount,
+                        length,
+                      )}
                     >
                       {props.items.map((item, index) => (
                         <VertItem

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "dev": "npm run webpack-dev-server --- --env.env=dev --mode=development",
+    "dev-mobile": "npm run webpack-dev-server --- --env.env=dev --mode=development --host=0.0.0.0",
     "build": "npm run webpack -- --env.env=prod",
     "webpack": "node ./node_modules/webpack/bin/webpack.js",
     "webpack-dev-server": "webpack-dev-server --hot",

@@ -15,6 +15,10 @@ const Button = styled.button`
   right: 1rem;
   top: -50%;
   border-radius: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: black;
   width: 4rem;
   height: 4rem;
@@ -72,15 +76,12 @@ class ButtonGroup extends Component {
   }
 
   render() {
+    const screen = window.screen.width;
     return (
       <React.Fragment>
         <Button type="button" onClick={this.toggleMenu}>
           <span
-            style={{
-              position: 'absolute',
-              top: '6%',
-              left: '25%',
-            }}
+            style={{ marginTop: screen > 550 ? '-10%' : '0%' }}
           >
             &#9776;
           </span>
