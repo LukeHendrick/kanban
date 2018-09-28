@@ -196,13 +196,18 @@ export default class Board extends Component {
     }
   }
 
-  editItem(type, parent, title, content) {
+  editItem(type, parent, title, content, color = null) {
     if (type === 'cancel') {
       this.setState({ editDisplay: 'hidden' });
     } else if (type === 'item') {
       const index = parent.index;
       const column = parent.column;
-      const newItem = { id: UUID(), title, content };
+      const newItem = {
+        id: UUID(),
+        title,
+        content,
+        color,
+      };
       const newItems = { ...this.state.items };
       newItems[column][index] = newItem;
       this.setState(() => ({
@@ -256,7 +261,6 @@ export default class Board extends Component {
         const first = this.state.ordered[0];
         const id = UUID();
         const noteColor = this.state.color === 2 ? 0 : this.state.color + 1;
-        console.log(noteColor);
         const note = {
           id, title, content, color: noteColor,
         };

@@ -12,6 +12,7 @@ export default class EditModal extends Component {
       title: this.props.item.title,
       content: this.props.item.content,
       display: this.props.display,
+      color: this.props.item.color,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +42,13 @@ export default class EditModal extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.editItem(this.props.type, this.props.parent, this.state.title, this.state.content);
+    this.props.editItem(
+      this.props.type,
+      this.props.parent,
+      this.state.title,
+      this.state.content,
+      this.state.color,
+    );
   }
 
   render() {
@@ -74,6 +81,18 @@ export default class EditModal extends Component {
                       onChange={this.handleChange}
                     />
                     <br />
+                  </p>
+                  <p style={{ display: 'table-row' }}>
+                    <select
+                      name="color"
+                      onChange={this.handleChange}
+                      defaultValue={this.props.item.color}
+                      style={{ display: 'table-cell', fontSize: '2rem', width: '100%' }}
+                    >
+                      <option value={0}>Pink</option>
+                      <option value={1}>Blue</option>
+                      <option value={2}>Yellow</option>
+                    </select>
                   </p>
                   <p>
                     <Button type="submit">Submit</Button>
@@ -110,7 +129,11 @@ export default class EditModal extends Component {
 }
 
 EditModal.propTypes = {
-  item: PropTypes.shape({ title: PropTypes.string, content: PropTypes.string }).isRequired,
+  item: PropTypes.shape({
+    title: PropTypes.string,
+    content: PropTypes.string,
+    color: PropTypes.number,
+  }).isRequired,
   display: PropTypes.string.isRequired,
   editItem: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,

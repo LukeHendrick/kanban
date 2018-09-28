@@ -17,12 +17,12 @@ const URL = `mongodb://${process.env.MONGOUSER}:${process.env.MONGOPASS}@ds11912
   process.env.DBNAME
 }`;
 
-app.use('*', (req, res, next) => {
-  if (req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(`https://${req.headers.host}${req.url}`);
-  }
-  return next();
-});
+// app.use('*', (req, res, next) => {
+//   if (req.headers['x-forwarded-proto'] !== 'https') {
+//     return res.redirect(`https://${req.headers.host}${req.url}`);
+//   }
+//   return next();
+// });
 
 const findDocuments = (db, data, cb) => {
   const collection = db.collection(process.env.DBNAME);
@@ -117,8 +117,8 @@ app.get('/api/new', (req, res) => {
               New: [
                 {
                   id,
-                  title: 'My First Note',
-                  content: 'This is my first note! Feel free to delete me!',
+                  title: 'Your First Note',
+                  content: 'I\'m your first note! Feel free to delete me!',
                   color: 0,
                 },
               ],
