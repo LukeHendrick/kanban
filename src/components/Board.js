@@ -341,7 +341,7 @@ export default class Board extends Component {
   render() {
     return (
       <div>
-        <h1 style={{ marginLeft: '39%', fontSize: '3rem' }}>{this.state.name}</h1>
+        <h1 style={{ marginLeft: '35%', fontSize: '3rem' }}>{this.state.name}</h1>
         <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
           <Droppable type="COLUMN" droppableId="board" direction="horizontal">
             {provided => (
