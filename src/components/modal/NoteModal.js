@@ -62,6 +62,7 @@ export default class NoteModal extends Component {
                     display: 'table-cell',
                     fontSize: '2rem',
                     width: '100%',
+                    boxSizing: 'border-box',
                     border: '1px solid black',
                   }}
                   name="title"
@@ -77,6 +78,7 @@ export default class NoteModal extends Component {
                     display: 'table-cell',
                     fontSize: '2rem',
                     width: '100%',
+                    boxSizing: 'border-box',
                     border: '1px solid black',
                   }}
                   name="content"

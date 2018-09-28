@@ -30,8 +30,8 @@ const BaseModal = styled.div`
   animation-delay: 0s;
   animation-play-state: running;
 
-  @media (max-width: 450px) {
-    width: 75%;
+  @media (max-width: 550px) {
+    width: 85%;
   }
 `;
 

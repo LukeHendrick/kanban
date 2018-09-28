@@ -339,9 +339,10 @@ export default class Board extends Component {
   }
 
   render() {
+    const screen = window.screen.width;
     return (
       <div>
-        <h1 style={{ textAlign: 'center', fontSize: '3rem' }}>{this.state.name}</h1>
+        <h1 style={{ textAlign: 'center', fontSize: screen <= 450 ? '1.5rem' : '3rem' }}>{this.state.name}</h1>
         <DragDropContext onDragEnd={this.onDragEnd} onDragStart={this.onDragStart}>
           <Droppable type="COLUMN" droppableId="board" direction="horizontal">
             {provided => (

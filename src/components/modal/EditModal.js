@@ -66,7 +66,13 @@ export default class EditModal extends Component {
                 <form style={{ display: 'table', margin: '0 auto' }} onSubmit={this.handleSubmit}>
                   <p style={{ display: 'table-row' }}>
                     <input
-                      style={{ display: 'table-cell', fontSize: '2rem', width: '100%' }}
+                      style={{
+                        display: 'table-cell',
+                        fontSize: '2rem',
+                        width: '100%',
+                        boxSizing: 'border-box',
+                        border: '1px solid black',
+                      }}
                       name="title"
                       value={this.state.title}
                       onChange={this.handleChange}
@@ -75,7 +81,13 @@ export default class EditModal extends Component {
                   </p>
                   <p style={{ display: 'table-row' }}>
                     <textarea
-                      style={{ display: 'table-cell', fontSize: '2rem', width: '100%' }}
+                      style={{
+                        boxSizing: 'border-box',
+                        border: '1px solid black',
+                        display: 'table-cell',
+                        fontSize: '2rem',
+                        width: '100%',
+                      }}
                       name="content"
                       value={this.state.content}
                       onChange={this.handleChange}
@@ -87,7 +99,12 @@ export default class EditModal extends Component {
                       name="color"
                       onChange={this.handleChange}
                       defaultValue={this.props.item.color}
-                      style={{ display: 'table-cell', fontSize: '2rem', width: '100%' }}
+                      style={{
+                        background: 'white',
+                        display: 'table-cell',
+                        fontSize: '2rem',
+                        width: '100%',
+                      }}
                     >
                       <option value={0}>Pink</option>
                       <option value={1}>Blue</option>

@@ -23,7 +23,7 @@ const getContainerStyle = () => ({
 });
 
 const VertList = (props) => {
-  const length = screen.height > 900 ? '40rem' : '30rem';
+  const length = window.screen.height > 900 ? '40rem' : '30rem';
   return (
     <Draggable draggableId={`drag${props.title}`} index={props.index}>
       {provided => (
