@@ -16,13 +16,14 @@ const PORT = process.env.PORT || 3000;
 const URL = `mongodb://${process.env.MONGOUSER}:${process.env.MONGOPASS}@ds119129.mlab.com:19129/${
   process.env.DBNAME
 }`;
-// app.use('*', (req, res, next) => {
-//     if (req.headers['x-forwarded-proto'] !== 'https') {
-//         return res.redirect('https://' + req.headers.host + req.url)
-//     } else {
-//         return next();
-//     }
-// })
+
+app.use('*', (req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    return res.redirect(`https://${req.headers.host}${req.url}`);
+  }
+  return next();
+});
+
 const findDocuments = (db, data, cb) => {
   const collection = db.collection(process.env.DBNAME);
   collection.find({ name: data.board }).toArray((err, docs) => {
@@ -62,6 +63,7 @@ app.get('/:board', (req, res) => {
   const sessData = req.session;
   MongoClient.connect(
     URL,
+    { useNewUrlParser: true },
     (err, client) => {
       assert.equal(null, err);
       const db = client.db(process.env.DBNAME);
@@ -100,6 +102,7 @@ app.get('/api/new', (req, res) => {
   const searchReq = { board: boardName };
   MongoClient.connect(
     URL,
+    { useNewUrlParser: true },
     (err, client) => {
       assert.equal(null, err);
       const db = client.db(process.env.DBNAME);
@@ -142,6 +145,7 @@ app.get('/api/search', (req, res) => {
   const sessData = req.session;
   MongoClient.connect(
     URL,
+    { useNewUrlParser: true },
     (err, client) => {
       assert.equal(null, err);
       const db = client.db(process.env.DBNAME);
@@ -167,6 +171,7 @@ app.get('/api/board', (req, res) => {
     const searchReq = req.query;
     MongoClient.connect(
       URL,
+      { useNewUrlParser: true },
       (err, client) => {
         assert.equal(null, err);
         const db = client.db(process.env.DBNAME);
@@ -182,6 +187,7 @@ app.post('/api/save', (req, res) => {
   const board = req.query.board;
   MongoClient.connect(
     URL,
+    { useNewUrlParser: true },
     (err, client) => {
       assert.equal(null, err);
       const db = client.db(process.env.DBNAME);
@@ -190,6 +196,11 @@ app.post('/api/save', (req, res) => {
       });
     },
   );
+});
+
+app.get('/api/clearSession', (req, res) => {
+  req.session.destroy();
+  res.sendStatus(200);
 });
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}!`); // eslint-disable-line no-console

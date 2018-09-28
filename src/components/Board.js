@@ -42,6 +42,14 @@ const reorder = (list, source, destination) => {
 };
 
 export default class Board extends Component {
+  static handleCacheReload() {
+    window.localStorage.clear();
+    fetch('/api/clearSession')
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
   constructor(props) {
     super(props);
 
@@ -49,6 +57,7 @@ export default class Board extends Component {
       _id: '',
       intro: '',
       name: '',
+      color: 0,
       items: {},
       ordered: [],
       newNoteDisplay: 'hidden',
@@ -246,16 +255,19 @@ export default class Board extends Component {
       } else {
         const first = this.state.ordered[0];
         const id = UUID();
-        const color = Math.floor((Math.random() * 3));
+        const noteColor = this.state.color === 2 ? 0 : this.state.color + 1;
+        console.log(noteColor);
         const note = {
-          id, title, content, color,
+          id, title, content, color: noteColor,
         };
         const items = this.state.items;
         items[first].splice(0, 0, note);
         this.setState(() => ({
+          color: noteColor,
           newNoteDisplay: 'hidden',
           items,
         }));
+        this.saveBoard();
       }
     } else if (type === 'lane') {
       if (item.title === '') {
@@ -276,6 +288,7 @@ export default class Board extends Component {
         ordered: newOrder,
         items: newItems,
       }));
+      this.saveBoard();
     }
   }
 
@@ -375,7 +388,11 @@ export default class Board extends Component {
           saveBoard={this.saveBoard}
           boardName={this.state.name}
         />
-        <QuestionModal hideQuestion={this.hideQuestion} display={this.state.questionDisplay} />
+        <QuestionModal
+          hideQuestion={this.hideQuestion}
+          display={this.state.questionDisplay}
+          clearCacheAndReload={Board.handleCacheReload}
+        />
       </div>
     );
   }

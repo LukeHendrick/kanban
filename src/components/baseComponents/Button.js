@@ -11,7 +11,7 @@ const Button = styled.button`
   transition: all 0.35s;
   &:hover {
     color: white;
-    background: ${props => (props.notFound ? 'red' : 'grey')};
+    background: ${props => (props.notFound ? 'red' : 'rgb(180, 180, 180)')};
   }
 `;
 

@@ -35,7 +35,7 @@ export default class DeleteModal extends Component {
   render() {
     const theme = {
       vis: this.state.display,
-      back: 'rgba(192, 192, 192, 0.75)',
+      back: '#feff9c',
     };
     if (this.state.display === 'visible') {
       return (
@@ -51,7 +51,9 @@ export default class DeleteModal extends Component {
             )}
             <form onSubmit={this.handleSubmit}>
               <Button type="submit">Submit</Button>
-              <Button type="button" onClick={this.handleCancel}>Cancel</Button>
+              <Button type="button" onClick={this.handleCancel}>
+                Cancel
+              </Button>
             </form>
           </BaseModal>
         </ThemeProvider>

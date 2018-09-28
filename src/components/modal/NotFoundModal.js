@@ -30,8 +30,8 @@ export default class NotFoundModal extends Component {
   render() {
     const theme = {
       vis: this.state.display,
-      back: 'rgba(93, 49, 83, 1)',
-      color: 'white',
+      back: '#feff9c',
+      color: 'black',
     };
     const boardName = this.props.boardName;
     if (this.state.display === 'visible') {

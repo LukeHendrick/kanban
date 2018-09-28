@@ -48,7 +48,7 @@ export default class NoteModal extends Component {
   render() {
     const theme = {
       vis: this.state.display,
-      back: 'rgba(192, 192, 192, 0.75)',
+      back: '#feff9c',
     };
     if (this.state.display === 'visible') {
       return (
@@ -59,7 +59,10 @@ export default class NoteModal extends Component {
               <p style={{ display: 'table-row' }}>
                 <input
                   style={{
-                    display: 'table-cell', fontSize: '2rem', width: '100%', border: '1px solid black',
+                    display: 'table-cell',
+                    fontSize: '2rem',
+                    width: '100%',
+                    border: '1px solid black',
                   }}
                   name="title"
                   value={this.state.title}
@@ -71,7 +74,10 @@ export default class NoteModal extends Component {
               <p style={{ display: 'table-row' }}>
                 <textarea
                   style={{
-                    display: 'table-cell', fontSize: '2rem', width: '100%', border: '1px solid black',
+                    display: 'table-cell',
+                    fontSize: '2rem',
+                    width: '100%',
+                    border: '1px solid black',
                   }}
                   name="content"
                   value={this.state.content}

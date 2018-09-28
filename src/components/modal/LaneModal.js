@@ -42,7 +42,7 @@ export default class LaneModal extends Component {
   render() {
     const theme = {
       vis: this.state.display,
-      back: 'rgba(192, 192, 192, 0.75)',
+      back: '#feff9c',
     };
     if (this.state.display === 'visible') {
       return (

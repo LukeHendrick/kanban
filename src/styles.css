@@ -151,10 +151,13 @@ body {
   box-shadow: 0 15px 10px #000;
   transform: rotate(-3deg);
 }
-.questionList > li {
-  font-weight:300;
-}
-.questionList {
-  text-align: center;
-  list-style-position: inside;
+
+.newBoardButton {
+  background: none!important;
+  color: blue;
+  text-decoration: underline;
+  border: none;
+  padding: 0!important;
+  font: inherit;
+  cursor: pointer;
 }
