@@ -87,6 +87,10 @@ class QuestionModal extends Component {
                   >
                     Click Here
                   </button>
+                  <h3 style={{ fontWeight: 300 }}>
+                    View this project on&nbsp;
+                    <a href="https://github.com/LukeHendrick/kanban">Github</a>
+                  </h3>
                 </h2>
                 <Button onClick={this.handleClick}>Close</Button>
               </div>
