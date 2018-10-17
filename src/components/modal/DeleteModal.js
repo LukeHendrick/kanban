@@ -5,6 +5,13 @@ import BaseModal from '../baseComponents/BaseModal';
 import Button from '../baseComponents/Button';
 
 export default class DeleteModal extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.display !== nextProps.display) {
+      return { display: nextProps.display };
+    }
+    return { prevState };
+  }
+
   constructor(props) {
     super(props);
 
@@ -14,12 +21,6 @@ export default class DeleteModal extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      display: nextProps.display,
-    });
   }
 
   handleCancel(e) {

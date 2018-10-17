@@ -196,7 +196,7 @@ export default class Board extends Component {
     }
   }
 
-  editItem(type, parent, title, content, color = null) {
+  editItem(type, parent, title, content, color) {
     if (type === 'cancel') {
       this.setState({ editDisplay: 'hidden' });
     } else if (type === 'item') {

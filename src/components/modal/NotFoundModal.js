@@ -19,7 +19,7 @@ export default class NotFoundModal extends Component {
     if (prevState.display !== nextProps.display) {
       return { display: nextProps.display };
     }
-    return { display: prevState.display };
+    return { prevState };
   }
 
   handleClick(e) {

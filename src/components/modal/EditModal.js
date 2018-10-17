@@ -5,6 +5,18 @@ import BaseModal from '../baseComponents/BaseModal';
 import Button from '../baseComponents/Button';
 
 export default class EditModal extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.display !== prevState.display) {
+      return {
+        display: nextProps.display,
+        title: nextProps.item.title,
+        content: nextProps.item.content,
+        color: nextProps.item.color,
+      };
+    }
+    return { prevState };
+  }
+
   constructor(props) {
     super(props);
 
@@ -18,14 +30,6 @@ export default class EditModal extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
     this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      display: nextProps.display,
-      title: nextProps.item.title,
-      content: nextProps.item.content,
-    });
   }
 
   handleChange(e) {

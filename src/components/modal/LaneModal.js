@@ -5,6 +5,13 @@ import BaseModal from '../baseComponents/BaseModal';
 import Button from '../baseComponents/Button';
 
 export default class LaneModal extends Component {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.display !== nextProps.display) {
+      return { display: nextProps.display };
+    }
+    return { prevState };
+  }
+
   constructor(props) {
     super(props);
 
@@ -15,12 +22,6 @@ export default class LaneModal extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      display: nextProps.display,
-    });
   }
 
   handleCancel(e) {

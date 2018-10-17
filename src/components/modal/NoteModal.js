@@ -23,7 +23,7 @@ export default class NoteModal extends Component {
     if (prevState.display !== nextProps.display) {
       return { display: nextProps.display };
     }
-    return { display: prevState.display };
+    return { prevState };
   }
 
   handleCancel(e) {
